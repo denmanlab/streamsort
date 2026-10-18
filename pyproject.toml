@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "streamsort"
+version = "1.0.0"
+description = "Online template-matching spike decoding and per-trial population geometry for closed-loop stimulation (Open Ephys)"
+requires-python = ">=3.10"
+# online path (Open Ephys processor, worker, replay): no spikeinterface
+dependencies = ["numpy", "scipy", "numba", "scikit-learn"]
+
+[project.optional-dependencies]
+fit = ["spikeinterface>=0.100", "kilosort>=4", "pandas", "pynwb"]
+test = ["pytest", "pandas"]
+
+[project.scripts]
+streamsort = "streamsort.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["streamsort*"]

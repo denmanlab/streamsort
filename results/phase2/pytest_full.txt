@@ -1,0 +1,8 @@
+......................................                                   [100%]
+============================= slowest 5 durations ==============================
+7.83s call     tests/test_phase2.py::test_snapshot_is_self_consistent
+4.30s call     tests/test_phase2.py::test_replay_equals_pull_decoder_short
+3.61s call     tests/test_data_pipeline.py::test_push_equals_pull_with_suppressor
+2.59s call     tests/test_phase2.py::test_online_path_imports_no_spikeinterface
+0.62s call     tests/test_data_pipeline.py::test_reproduces_saved_validation
+38 passed in 22.55s

@@ -1,0 +1,98 @@
+{
+ "t0": 3108.697469120929,
+ "first_trial": 226,
+ "transport": "pipe",
+ "equality_buf1024": {
+  "n_plugin": 62727,
+  "n_ref": 62727,
+  "identical": true,
+  "jaccard": 1.0,
+  "n_pulses": 30,
+  "n_ttl_in_window": 30
+ },
+ "equality_buf512": {
+  "n_plugin": 62727,
+  "n_ref": 62727,
+  "identical": true,
+  "jaccard": 1.0,
+  "n_pulses": 30,
+  "n_ttl_in_window": 30
+ },
+ "hot_swap": {
+  "n_swaps": 1,
+  "after_settle": {
+   "n_plugin": 30293,
+   "n_ref": 30293,
+   "identical": true,
+   "jaccard": 1.0
+  },
+  "all": {
+   "n_plugin": 62727,
+   "n_ref": 62727,
+   "identical": true,
+   "jaccard": 1.0
+  }
+ },
+ "end_to_end": {
+  "seconds": 120.0,
+  "wall_s": 142.5780864579865,
+  "startup_s": 22.33926866699767,
+  "stream_wall_s": 120.06931912500295,
+  "n_ttl": 60,
+  "n_trials_analysed": 60,
+  "all_three_probes_paired": true,
+  "ttl_index_sequential": true,
+  "cond_sequence_matches": true,
+  "n_programmed": 60,
+  "n_hold": 0,
+  "pulse_to_loss_ms": {
+   "median": 533.8244789963937,
+   "max": 543.3860839984845
+  },
+  "pulse_to_stim_ms": {
+   "median": 168.5604165031691,
+   "max": 244.33141699410044
+  },
+  "geometry_ms_median": 1.103145994420629,
+  "n_loss": 50,
+  "rt_factor_per_probe": {
+   "A": {
+    "median": 0.1568892490047845,
+    "p99": 1.137142348669464
+   },
+   "B": {
+    "median": 0.1433249216090048,
+    "p99": 0.9845210880229234
+   },
+   "C": {
+    "median": 0.11930469614452299,
+    "p99": 0.967427695905617
+   }
+  },
+  "rt_factor_3probe_serial": {
+   "median": 0.42423830392736883,
+   "p99": 3.068648528537287,
+   "max": 3.4529012734010864
+  },
+  "equality_vs_reference": {
+   "A": {
+    "n_plugin": 129324,
+    "n_ref": 129324,
+    "identical": true,
+    "jaccard": 1.0
+   },
+   "B": {
+    "n_plugin": 112051,
+    "n_ref": 112051,
+    "identical": true,
+    "jaccard": 1.0
+   },
+   "C": {
+    "n_plugin": 64641,
+    "n_ref": 64641,
+    "identical": true,
+    "jaccard": 1.0
+   }
+  }
+ }
+}

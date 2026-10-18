@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+build/
+cpp/build/
+plugin/streamsort-oe/build/
+plugin/streamsort-oe/tests/build/
+*.bin
+.DS_Store

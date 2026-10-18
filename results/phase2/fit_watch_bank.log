@@ -1,0 +1,11 @@
+[fit] build_template_bank.py
+[bank] noise: median 10.06 uV (12.9 s)
+[bank] 187 units, T=82, L=12, built in 176.5 s -> /Users/danieldenman/.claude-science/orgs/8942f162-9364-4066-adf0-8b71aa853772/workspaces/f5dc40b9-880b-4836-b3fb-2d7a6221d37c/results/phase2/fit_jlh32A_120s/templates.npz (0.7 MB)
+[bank] fingerprint f3dfcdfe8fcf479a
+[bank] usable 151 / 187
+[bank] DONE
+[fit] exit 0
+[fit] est_whitening.py
+[whiten] jlh32live_probeA: 10.7 s, noise sd median 0.969
+[fit] exit 0
+[fit] config written

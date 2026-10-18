@@ -1,0 +1,42 @@
+streamsort v1.0.0 - Phase 2 test report
+machine: arm64 macOS 26.6.2, Python 3.11.17
+
+VERIFICATION COMMANDS (run from the repository root, PYTHONPATH=.)
+  1. python -m pytest tests -q -rs
+  2. python scripts/replay_harness.py                       # equality, hot-swap, 3-probe + worker (real time)
+     HARNESS_E2E_ONLY=1 python scripts/replay_harness.py    # end-to-end only (used for the clean timing run)
+  3. python -m streamsort.cli watch --rec-dir <jlh32 recording1> --stream Neuropix-PXI-104.ProbeA-AP --probe A \
+       --name jlh32live --nch 200 --seconds 120 --out results/phase2/fit_jlh32A_120s \
+       --snapshot-dir <scratch>/phase2_snapshot --scratch <scratch>/phase2_fit_scratch --plugin-ttl-line 5
+  4. python -m streamsort.cli replay --session <jlh32 recording1> --probe-config results/phase2/fit_jlh32A_120s/streamsort_oe_A.json \
+       --t0 3108.697469120929 --seconds 20 --pace 0
+  5. python scripts/make_plugin_figures.py
+
+1. PYTEST
+  38 passed in 22.55s
+
+2. REPLAY HARNESS (jlh32, t0 = 3108.697 s, first trial 226, transport pipe)
+  equality_buf1024: plugin 62727 vs reference 62727 spikes, identical=True, pulses 30/30
+  equality_buf512: plugin 62727 vs reference 62727 spikes, identical=True, pulses 30/30
+  hot_swap: swaps=1, identical over run=True (62727 spikes), after swap+settle identical=True
+  end_to_end: 120 s replay of probes A,B,C + worker process at real-time pace (startup 22.3 s)
+    trials analysed 60/60 TTLs; all three probes paired=True; TTL index sequential=True; condition sequence matches=True
+    stimulator: programmed 60, hold 0; loss values 50 (first 10 trials fit the reducer)
+    pulse->loss ms: median 534, max 543; pulse->stim ms: median 169, max 244; geometry 1.10 ms
+    real-time factor per buffer (median/p99): A 0.16/1.14, B 0.14/0.98, C 0.12/0.97
+    A+B+C serial: median 0.42, p99 3.07, max 3.45
+    spikes identical to reference: A True (129324), B True (112051), C True (64641)
+    note: an earlier run with concurrent figure rendering showed two contention outliers (serial max 21x, pulse->stim 916 ms); the clean rerun above is reported.
+
+3. WATCH -> FIT (no NWB; 120 s snapshot of jlh32 probe A)
+  [fit] 15 trials, 0 onsets undetected, 0.011% of samples blanked
+  [fit] kilosort4: 187 units in 689.6 s
+  first run stopped at build_template_bank (hardcoded seg600 tag); fixed (SEG_TAG/--tag from --seconds); bank + whitening re-run on the finished sort:
+  [bank] usable 151 / 187
+  [whiten] jlh32live_probeA: 10.7 s, noise sd median 0.969
+  outputs: templates.npz, whitening.npz, sorting_report.csv, streamsort_oe_A.json
+
+4. CLI REPLAY WITH THE FRESH FIT: 20 s, probe A, 19561 spikes, real-time factor median 0.12 (p99 0.16), startup 6.8 s
+
+NOT TESTED: Open Ephys GUI in the loop (Python Processor plugin not built/loaded); Windows rig; worker over a socket Listener
+  (sandbox forbids binding sockets; the identical Connection API was exercised over multiprocessing.Pipe).

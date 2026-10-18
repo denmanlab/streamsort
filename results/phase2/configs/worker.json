@@ -1,0 +1,24 @@
+{
+ "probes": [
+  "A",
+  "B",
+  "C"
+ ],
+ "address": [
+  "127.0.0.1",
+  6010
+ ],
+ "worker_address": [
+  "127.0.0.1",
+  6010
+ ],
+ "iti_s": 2.0,
+ "analysis": "procrustes",
+ "analysis_kw": {
+  "reducer": "pca",
+  "k": 3,
+  "n_fit": 10
+ },
+ "reprog_ms": 100.0,
+ "log": "/Users/danieldenman/.claude-science/orgs/8942f162-9364-4066-adf0-8b71aa853772/workspaces/f5dc40b9-880b-4836-b3fb-2d7a6221d37c/results/phase2/worker_log.json"
+}

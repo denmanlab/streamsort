@@ -1,0 +1,18 @@
+{
+ "probe": "C",
+ "stream": "Neuropix-PXI-104.ProbeC-AP",
+ "templates": "/Users/danieldenman/.claude-science/orgs/8942f162-9364-4066-adf0-8b71aa853772/workspaces/f5dc40b9-880b-4836-b3fb-2d7a6221d37c/results/jlh32_probeC/templates.npz",
+ "whitening": "/Users/danieldenman/.claude-science/orgs/8942f162-9364-4066-adf0-8b71aa853772/workspaces/f5dc40b9-880b-4836-b3fb-2d7a6221d37c/results/jlh32_probeC/whitening.npz",
+ "sorting_report": "/Users/danieldenman/.claude-science/orgs/8942f162-9364-4066-adf0-8b71aa853772/workspaces/f5dc40b9-880b-4836-b3fb-2d7a6221d37c/results/jlh32_probeC/sorting_report.csv",
+ "nch": 200,
+ "bit_volts": 0.195,
+ "input": "uV",
+ "detect_threshold": 4.0,
+ "min_energy": 50.0,
+ "ttl_line": 5,
+ "worker_address": [
+  "127.0.0.1",
+  6010
+ ],
+ "repo": "/Users/danieldenman/.claude-science/orgs/8942f162-9364-4066-adf0-8b71aa853772/workspaces/f5dc40b9-880b-4836-b3fb-2d7a6221d37c"
+}
