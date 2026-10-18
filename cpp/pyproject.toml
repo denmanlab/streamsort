@@ -1,0 +1,12 @@
+[build-system]
+requires = ["scikit-build-core>=0.8", "pybind11>=2.11"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "streamsort-core"
+version = "0.2.0"
+description = "C++ decoder core of streamsort (Python module streamsort_core)"
+requires-python = ">=3.10"
+
+[tool.scikit-build]
+cmake.define = {STREAMSORT_TESTS = "OFF"}

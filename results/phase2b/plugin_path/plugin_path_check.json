@@ -1,0 +1,33 @@
+{
+ "seconds": 20.0,
+ "message_counts": {
+  "STATUS": 10,
+  "SPIKES": 587,
+  "EVENT": 10,
+  "PULSE": 10
+ },
+ "spikes": {
+  "n_plugin": 21685,
+  "n_ref": 21685,
+  "identical": true,
+  "jaccard": 1.0
+ },
+ "n_ttl": 10,
+ "n_pulses": 10,
+ "pulses_with_artifact": 10,
+ "ttl_index_sequential": true,
+ "onset_minus_ttl_ms": [
+  0.067,
+  -0.133,
+  0.067,
+  0.3,
+  0.1,
+  0.1,
+  0.3,
+  -0.1,
+  -0.133,
+  0.067
+ ],
+ "hello_units": 248,
+ "heads_monotonic": true
+}

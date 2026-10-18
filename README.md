@@ -1,4 +1,4 @@
-> **Branch `python` — Phase 2:** Open Ephys *Python Processor* path (one decoder script per probe stream, multiprocessing worker), `streamsort fit / watch / replay`. The current version is on `main` / `c++` (Phase 2b).
+> **Branch `c++` / `main` — Phase 2b:** native multi-stream Open Ephys plugin (`plugin/streamsort-oe/`, see its README), JUCE-free C++ decoder core (`cpp/`), `streamsort bank --ks-folder`, worker v2 with GUI and session emulator — see **`README_streamsort_phase2b.md`**. The Phase 2 Python Processor path below is kept as the legacy fallback (branch `python`).
 > License: GPL-3.0 (see `LICENSE`, `THIRD_PARTY.md`).
 
 # streamsort

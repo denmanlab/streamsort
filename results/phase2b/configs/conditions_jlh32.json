@@ -1,0 +1,248 @@
+{
+ "conditions": [
+  {
+   "amplitude": -100,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -100,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 200,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "monopolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -50,
+   "polarity": "monopolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -50,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 200,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "monopolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -25,
+   "polarity": "monopolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -25,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -5,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -5,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 5,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 5,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 25,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 25,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 50,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 50,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 100,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 100,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  }
+ ],
+ "schedule": [
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "ks_folder": "/Users/danieldenman/stim_scratch/jlh32_probeA/sort_kilosort4_seg600/sorter_output",
+ "rec_dir": "/Users/danieldenman/ephys_data_stim/jlh32_2023-02-18_16-07-58/Record Node 105/experiment1/recording1",
+ "stream": "Neuropix-PXI-104.ProbeA-AP",
+ "nch": 200,
+ "n_units": 327,
+ "n_usable": 248,
+ "noise_s": [
+  10.0,
+  30.0
+ ],
+ "whiten_s": [
+  60.0,
+  20.0
+ ],
+ "ttl_stream": "NI-DAQmx-107.PXI-6133",
+ "ttl_line": 5,
+ "offset_samples": 0,
+ "sample_rate": 29970.075739165302,
+ "detect_threshold": 4.0,
+ "min_energy": 50.0,
+ "fingerprint": "3afc58c09f49269b"
+}

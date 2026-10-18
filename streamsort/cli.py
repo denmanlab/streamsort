@@ -67,7 +67,11 @@ def cmd_fit(a) -> int:
             print(f"[fit] step failed ({r.returncode})", file=sys.stderr)
             return r.returncode
     cfg_path.write_text(json.dumps(plugin_config(a), indent=1))
-    print(f"[fit] done: {Path(a.out) / 'templates.npz'} | plugin config {cfg_path}")
+    from .bank_export import export_from_bank_files
+    ks_out = Path(env["SCRATCH_DIR"]) / f"sort_{a.sorter}_seg{int(a.seconds)}" / "sorter_output"
+    folders = [Path(a.out) / "streamsort"] + ([ks_out / "streamsort"] if ks_out.exists() else [])
+    export_from_bank_files(a.out, a.rec_dir, a.stream, a.nch, folders)
+    print(f"[fit] done: {Path(a.out) / 'templates.npz'} | plugin config {cfg_path} | plugin bank {', '.join(map(str, folders))}")
     return 0
 
 
@@ -105,6 +109,48 @@ def cmd_replay(a) -> int:
                 n_trials=len(r["worker"]["trials"]) if r["worker"] else None, startup_s=r["startup_s"])
     print(json.dumps(summ, indent=1))
     return 0
+
+
+def cmd_bank(a) -> int:
+    from .bank_export import build_bank
+    out = build_bank(a.ks_folder, a.rec_dir, a.stream, a.nch, out=a.out, ttl_stream=a.ttl_stream or None, ttl_line=a.ttl_line,
+                     offset_samples=a.offset_samples, noise_s=(a.noise_start, a.noise_dur), whiten_s=(a.whiten_start, a.whiten_dur))
+    print(f"[bank] plugin bank written to {out}")
+    return 0
+
+
+def cmd_emulate(a) -> int:
+    from .worker2.emulator import Emulator
+    banks = dict(x.split("=", 1) for x in a.bank)
+    em = Emulator(a.session, banks, a.t0, a.seconds, buffer=a.buffer, pace=a.pace, ttl_stream=a.ttl_stream or None,
+                  ttl_line=a.ttl_line, threads=a.threads, pub=a.pub, cond=a.cond)
+    print(f"[emulate] {len(banks)} stream(s), {em.n_ttl if em.n_ttl else len(em.ttl)} stim TTLs, publishing on {a.pub}", flush=True)
+    try:
+        em.run()
+    finally:
+        em.close()
+    return 0
+
+
+def cmd_worker_zmq(a) -> int:
+    import time
+    from .worker2.engine import Engine, ZmqWorker
+    cfg = json.loads(Path(a.config).read_text())
+    eng = Engine(cfg); zw = ZmqWorker(eng, pub=cfg.get("pub", a.pub), cond=cfg.get("cond", a.cond)).start(); eng.arm()
+    print(f"[worker] subscribed to {cfg.get('pub', a.pub)}, conditions on {cfg.get('cond', a.cond)}; Ctrl-C to stop", flush=True)
+    try:
+        while True:
+            time.sleep(1.0)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        zw.stop(); eng.close()
+    return 0
+
+
+def cmd_worker_gui(a) -> int:
+    from .worker2.gui import main as gui_main
+    return gui_main(a.config)
 
 
 def cmd_worker(a) -> int:
@@ -153,6 +199,25 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--ttl-line", type=int, default=5)
     p.add_argument("--transport", default="listener", choices=["listener", "pipe"])
     p.add_argument("--log", default=None); p.set_defaults(fn=cmd_replay)
+    p = sub.add_parser("bank", help="decoder bank (plugin tables) from any Kilosort output folder")
+    p.add_argument("--ks-folder", required=True); p.add_argument("--rec-dir", required=True); p.add_argument("--stream", required=True)
+    p.add_argument("--nch", type=int, default=384); p.add_argument("--out", default=None, help="default <ks-folder>/streamsort")
+    p.add_argument("--ttl-stream", default="NI-DAQmx-107.PXI-6133", help="stim TTL stream ('' = none)"); p.add_argument("--ttl-line", type=int, default=5)
+    p.add_argument("--offset-samples", type=int, default=0, help="KS spike_times offset into the stream (sorted segment start)")
+    p.add_argument("--noise-start", type=float, default=10.0); p.add_argument("--noise-dur", type=float, default=30.0)
+    p.add_argument("--whiten-start", type=float, default=60.0); p.add_argument("--whiten-dur", type=float, default=20.0)
+    p.set_defaults(fn=cmd_bank)
+    p = sub.add_parser("emulate", help="replay a session through the C++ core, publishing the plugin's ZMQ messages")
+    p.add_argument("--session", required=True); p.add_argument("--bank", action="append", required=True, help="STREAM=bank_or_ks_folder (repeat)")
+    p.add_argument("--t0", type=float, required=True); p.add_argument("--seconds", type=float, default=60.0)
+    p.add_argument("--buffer", type=int, default=1024); p.add_argument("--pace", type=float, default=1.0); p.add_argument("--threads", type=int, default=1)
+    p.add_argument("--ttl-stream", default="NI-DAQmx-107.PXI-6133"); p.add_argument("--ttl-line", type=int, default=5)
+    p.add_argument("--pub", default="tcp://*:5557"); p.add_argument("--cond", default="tcp://127.0.0.1:5558"); p.set_defaults(fn=cmd_emulate)
+    p = sub.add_parser("worker-zmq", help="headless worker v2 (ZMQ client of the Open Ephys plugin)")
+    p.add_argument("--config", required=True); p.add_argument("--pub", default="tcp://127.0.0.1:5557"); p.add_argument("--cond", default="tcp://*:5558")
+    p.set_defaults(fn=cmd_worker_zmq)
+    p = sub.add_parser("worker-gui", help="worker v2 with GUI (configure -> armed -> running)")
+    p.add_argument("--config", default=None); p.set_defaults(fn=cmd_worker_gui)
     p = sub.add_parser("worker", help="live pooling / analysis / stimulator worker")
     p.add_argument("--config", required=True); p.set_defaults(fn=cmd_worker)
     return ap

@@ -1,0 +1,49 @@
+streamsort Phase 2b - test report
+machine: arm64 macOS 26.6.2, Python 3.11.17
+
+VERIFICATION COMMANDS (repository root, PYTHONPATH=.)
+  0. cmake -S cpp -B cpp/build && cmake --build cpp/build -j                                  # C++ core + streamsort_core
+     cmake -S plugin/streamsort-oe -B plugin/streamsort-oe/build -DGUI_BASE_DIR=<plugin-GUI v1.1.0> && cmake --build plugin/streamsort-oe/build
+     cmake -S plugin/streamsort-oe/tests -B plugin/streamsort-oe/tests/build && cmake --build plugin/streamsort-oe/tests/build
+  1. QT_QPA_PLATFORM=offscreen python -m pytest tests -q -rs
+  2. python scripts/replay_harness_phase2b.py        (HARNESS_PART=3 reruns only the 3-probe timing)
+  3. python -m streamsort.cli bank --ks-folder <stim_scratch>/jlh32_probeA/sort_kilosort4_seg600/sorter_output \
+       --rec-dir <jlh32 recording1> --stream Neuropix-PXI-104.ProbeA-AP --nch 200 --out results/phase2b/bank_jlh32A_seg600
+  4. python scripts/phase2b_plugin_path_check.py 20
+  5. python scripts/phase2b_e2e.py headless 120
+  6. QT_QPA_PLATFORM=offscreen python scripts/phase2b_e2e.py gui procrustes 60 ; ... gui image_decoder 60
+  7. python scripts/make_phase2b_figures.py
+
+1. PYTEST
+  56 passed in 41.06s  (38 Phase 1/2 tests unchanged + 18 Phase 2b)
+
+2. C++ CORE vs PYTHON DECODER (jlh32, t0 = 3108.697 s)
+  probe A 60 s, 1024-sample blocks: 62727 vs 62727 spikes, identical=True
+  probe A 60 s, 512-sample blocks: 62727 vs 62727 spikes, identical=True
+  pulse onsets identical: True (30); exported tables identical: True
+  A/B/C 120 s, threads per stream 1: identical=True (129324/112051/64641); rt parallel median 0.158 p99 0.88 max 1.02
+  A/B/C 120 s, threads per stream 2: identical=True (129324/112051/64641); rt parallel median 0.115 p99 0.84 max 0.99
+  (Phase 2 Python Processor path, 3 probes serial: median 0.42, p99 3.07, max 3.45)
+
+3. BANK FROM ANY KILOSORT FOLDER
+  Phase 1 seg600 KS4 folder -> 327 units; ids/templates identical (max |diff| 0.0), whitening identical (0.0), usable 248 = 248
+  decode with that bank vs Phase 1 Python decoder, 15 s: 15591 = 15591 spikes, identical
+  Phase 2 120 s KS4 folder -> 187 units, 151 usable; C++ loader OK
+
+4. PLUGIN PATH (plugin's StreamDecoder + ZmqLink, C++ driver, probe A 20 s)
+  spikes 21685 vs 21685, identical=True; pulses 10/10 with artifact 10, ttl index sequential=True
+  onset - TTL (ms): [0.067, -0.133, 0.067, 0.3, 0.1, 0.1, 0.3, -0.1, -0.133, 0.067]; messages {'STATUS': 10, 'SPIKES': 587, 'EVENT': 10, 'PULSE': 10}
+  plugin bundle: compiles and links against Open Ephys GUI v1.1.0 headers (Plugin API 10), macOS arm64
+
+5. EMULATE -> WORKER v2 over ZMQ (inproc), A+B+C, 120 s, real-time pace
+  trials 60/60; paired on all streams=True; condition sequence matches=True; programmed 60, hold 0
+  TTL->loss ms median 534 max 562; TTL->stim (100 ms reprogramming) median 109 max 110
+  spikes identical to Python: A True (129324), B True (112051), C True (64641)
+
+6. WORKER GUI (offscreen, against the emulator, 60 s)
+  procrustes: state RUNNING, trials 30/30, holds 0, TTL->loss median 535 ms, TTL->stim median 107 ms
+  image_decoder: state RUNNING, trials 30/30, holds 0, TTL->loss median 532 ms, TTL->stim median 108 ms
+  placeholder image readout: 26 classes (one PNG per condition), trained on 1892 trials outside the replay window; held-out window accuracy 0.68
+
+NOT TESTED: plugin loaded inside the Open Ephys GUI; Windows build; ZMQ over TCP between processes (sandbox blocks socket
+  binding; inproc used); serial stimulator hardware.

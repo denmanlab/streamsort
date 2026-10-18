@@ -1,0 +1,2 @@
+qt.qpa.fonts: Populating font family aliases took 58 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+{"analysis": "image_decoder", "trials": 30, "holds": 0, "state": "RUNNING", "n_ttl": 30, "lat_loss_median": 537.5745296478271, "lat_stim_median": 106.31263256072998}

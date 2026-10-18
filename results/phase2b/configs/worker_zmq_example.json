@@ -1,0 +1,263 @@
+{
+ "pub": "tcp://127.0.0.1:5557",
+ "cond": "tcp://*:5558",
+ "streams": [],
+ "iti_s": 2.0,
+ "analysis": "procrustes",
+ "analysis_kw": {
+  "reducer": "pca",
+  "k": 3,
+  "n_fit": 20
+ },
+ "stimulator": "dummy",
+ "stimulator_kw": {
+  "reprog_ms": 100.0
+ },
+ "conditions": [
+  {
+   "amplitude": -100,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -100,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "bipolar",
+   "pulse_duration": 200,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -50,
+   "polarity": "monopolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -50,
+   "polarity": "monopolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -50,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "bipolar",
+   "pulse_duration": 200,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -25,
+   "polarity": "monopolar",
+   "pulse_duration": 30,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -25,
+   "polarity": "monopolar",
+   "pulse_duration": 50,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -25,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": -5,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": -5,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 5,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 5,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 25,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 25,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 50,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 50,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  },
+  {
+   "amplitude": 100,
+   "polarity": "bipolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 14
+  },
+  {
+   "amplitude": 100,
+   "polarity": "monopolar",
+   "pulse_duration": 100,
+   "contact_negative": 3,
+   "contact_positive": 0
+  }
+ ],
+ "schedule": [
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20
+ ],
+ "log": "worker_log.json"
+}
