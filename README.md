@@ -3,8 +3,7 @@
 
 # streamsort
 
-Online spike decoding and per-trial population geometry for closed-loop electrical stimulation,
-validated by replaying pre-recorded Neuropixels data (DANDI 000774, jlh32 / jlh34) as a live stream.
+Online spike decoding and per-trial population geometry for closed-loop electrical stimulation.
 
 * **fit** – Kilosort 4 on a leading segment → `templates.npz`, `whitening.npz`, `sorting_report.csv`
 * **online decoder** – causal artifact suppression, filtering, whitening and template matching per probe
@@ -67,27 +66,20 @@ and the new decoder is warmed on the last 15 ms of raw data.
 
 | | macOS arm64 (M1, dev) | Windows x64 (rig) | Linux x64 |
 |---|---|---|---|
-| decoder core, worker, replay, tests | ✓ run here | not run | not run |
-| Open Ephys GUI + Python Processor in the loop | **not run** | **not run** | not run |
+| decoder core, worker, replay, tests | ✓ tested | not tested | not tested |
+| Open Ephys GUI + Python Processor in the loop | **not tested** | **not tested** | not tested |
 | worker over Listener (TCP / AF_UNIX / named pipe) | code path present; sandbox forbids binding sockets, tested over `multiprocessing.Pipe` (same `Connection` API) | named pipe expected | AF_UNIX expected |
 | numba kernels | ✓ | expected (numba wheels exist) | expected |
 
 **arm64 note:** the plugin's CMake builds a universal binary (`arm64;x86_64`). The GUI, the plugin and the conda Python must all be the same architecture.
 An x86_64 conda env under Rosetta will not load into an arm64 GUI. Measured timings are from an M1 (8 GB) and will differ on the rig.
 
-**Not validated inside the GUI.** All results below come from the replay harness, which calls the plugin class's code path with GUI-shaped buffers and TTL events.
+**Not yet validated inside the GUI.** All results below come from the replay harness, which calls the plugin class's code path with GUI-shaped buffers and TTL events.
 Running inside Open Ephys GUI v1.x, and on the Windows rig, remains to be done.
 
-### Verification (jlh32, replay harness `scripts/replay_harness.py`)
+### Verification
 
-| test | result |
-|---|---|
-| probe A, 60 s, 1024- and 512-sample buffers vs Phase 1 decoder | 62727 = 62727 spikes, identical; 30/30 pulses |
-| mid-run atomic replace of `templates.npz` | 1 swap; spikes identical (62727) |
-| A+B+C + worker process, 120 s at real-time pace | 60/60 trials, pulses paired on all 3 probes, condition sequence matches, 0 holds; spikes identical to the reference on every probe |
-| pulse → loss ready / pulse → stimulator reprogrammed (100 ms) | median 534 / 169 ms, max 543 / 244 ms (ITI 2000 ms) |
-| real-time factor per buffer, per probe (median) | A 0.16, B 0.14, C 0.12 |
-| A+B+C serial | median 0.42, p99 3.07, max 3.45 (peaks: about 1 buffer per pulse, absorbed by the input FIFO) |
+
 
 ![real-time factor](figures/phase2/plugin_realtime_factor.png)
 
