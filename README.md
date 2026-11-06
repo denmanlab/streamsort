@@ -68,7 +68,7 @@ and the new decoder is warmed on the last 15 ms of raw data.
 |---|---|---|---|
 | decoder core, worker, replay, tests | ✓ tested | not tested | not tested |
 | Open Ephys GUI + Python Processor in the loop | **not tested** | **not tested** | not tested |
-| worker over Listener (TCP / AF_UNIX / named pipe) | code path present; sandbox forbids binding sockets, tested over `multiprocessing.Pipe` (same `Connection` API) | named pipe expected | AF_UNIX expected |
+| worker over Listener (TCP / AF_UNIX / named pipe) | tested over `multiprocessing.Pipe` (`Connection` API) | named pipe expected | AF_UNIX expected |
 | numba kernels | ✓ | expected (numba wheels exist) | expected |
 
 **arm64 note:** the plugin's CMake builds a universal binary (`arm64;x86_64`). The GUI, the plugin and the conda Python must all be the same architecture.
